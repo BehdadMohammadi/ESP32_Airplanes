@@ -1,6 +1,11 @@
 #include "nvs_flash.h"
 #include "esp_log.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
 #include "wifi_connector.h"
+#include "airplane_fetcher.h"
+
 
 static const char *TAG = "MAIN";
 
@@ -18,8 +23,9 @@ void app_main(void) {
     if (wifi_init_sta() == ESP_OK) {
         ESP_LOGI(TAG, "Internet Ready. Ready for Step 2!");
         // Here is where you will eventually call your airplane data task
+        xTaskCreate(airplane_fetcher_task, "airplane_fetcher_task", 8192, NULL, 5, NULL);
     } else {
         ESP_LOGE(TAG, "Failed to connect. System Halted.");
     }
-    
+
 }
