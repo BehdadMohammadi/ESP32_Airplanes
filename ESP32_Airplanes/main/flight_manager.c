@@ -10,7 +10,7 @@ static const char *TAG = "FLIGHT_MGR";
 flight_data_t watchlist[MAX_TRACKED_PLANES];
 
 
-#define HOME_LAT 49.23622  // Example: Vancouver
+#define HOME_LAT 49.23622
 #define HOME_LON -122.84112
 
 #define EARTH_RADIUS_KM 6371.0
