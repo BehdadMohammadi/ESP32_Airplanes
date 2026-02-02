@@ -9,10 +9,16 @@
 static const char *TAG = "PLANE_FETCH";
 
 // Europe/London area bounding box
-#define LAMIN "51.2"
-#define LAMAX "51.7"
-#define LOMIN "-0.5"
-#define LOMAX "0.3"
+// #define LAMIN "51.2"
+// #define LAMAX "51.7"
+// #define LOMIN "-0.5"
+// #define LOMAX "0.3"
+
+// Vacouver, Canada area bounding box
+#define LAMIN "49.0"
+#define LAMAX "49.5"
+#define LOMIN "-123.5"
+#define LOMAX "-122.5"
 
 #define OPENSKY_URL "https://opensky-network.org/api/states/all?lamin=" LAMIN "&lomin=" LOMIN "&lamax=" LAMAX "&lomax=" LOMAX
 
