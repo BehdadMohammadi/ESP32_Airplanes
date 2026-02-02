@@ -5,6 +5,7 @@
 
 #include "wifi_connector.h"
 #include "airplane_fetcher.h"
+#include "flight_manager.h"
 
 
 static const char *TAG = "MAIN";

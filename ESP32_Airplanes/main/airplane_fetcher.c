@@ -5,6 +5,7 @@
 #include "cJSON.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "flight_manager.h"
 
 static const char *TAG = "PLANE_FETCH";
 
@@ -35,39 +36,39 @@ esp_err_t _http_event_handler(esp_http_client_event_t *evt) {
     return ESP_OK;
 }
 
-void parse_and_print_flights(const char *json_str) {
-    cJSON *root = cJSON_Parse(json_str);
-    if (root == NULL) {
-        ESP_LOGE(TAG, "Failed to parse JSON");
-        return;
-    }
+// void parse_and_print_flights(const char *json_str) {
+//     cJSON *root = cJSON_Parse(json_str);
+//     if (root == NULL) {
+//         ESP_LOGE(TAG, "Failed to parse JSON");
+//         return;
+//     }
 
-    cJSON *states = cJSON_GetObjectItem(root, "states");
-    if (!cJSON_IsArray(states)) {
-        ESP_LOGI(TAG, "No planes found in this area.");
-        cJSON_Delete(root);
-        return;
-    }
+//     cJSON *states = cJSON_GetObjectItem(root, "states");
+//     if (!cJSON_IsArray(states)) {
+//         ESP_LOGI(TAG, "No planes found in this area.");
+//         cJSON_Delete(root);
+//         return;
+//     }
 
-    int total_planes = cJSON_GetArraySize(states);
-    int to_print = (total_planes > 10) ? 10 : total_planes;
+//     int total_planes = cJSON_GetArraySize(states);
+//     int to_print = (total_planes > 10) ? 10 : total_planes;
 
-    ESP_LOGI(TAG, "Found %d planes. Printing first %d:", total_planes, to_print);
+//     ESP_LOGI(TAG, "Found %d planes. Printing first %d:", total_planes, to_print);
 
-    for (int i = 0; i < to_print; i++) {
-        cJSON *plane = cJSON_GetArrayItem(states, i);
+//     for (int i = 0; i < to_print; i++) {
+//         cJSON *plane = cJSON_GetArrayItem(states, i);
         
-        // OpenSky format: [0]=icao24, [1]=callsign, [5]=long, [6]=lat
-        char *icao = cJSON_GetArrayItem(plane, 0)->valuestring;
-        char *callsign = cJSON_GetArrayItem(plane, 1)->valuestring;
-        double lon = cJSON_GetArrayItem(plane, 5)->valuedouble;
-        double lat = cJSON_GetArrayItem(plane, 6)->valuedouble;
+//         // OpenSky format: [0]=icao24, [1]=callsign, [5]=long, [6]=lat
+//         char *icao = cJSON_GetArrayItem(plane, 0)->valuestring;
+//         char *callsign = cJSON_GetArrayItem(plane, 1)->valuestring;
+//         double lon = cJSON_GetArrayItem(plane, 5)->valuedouble;
+//         double lat = cJSON_GetArrayItem(plane, 6)->valuedouble;
 
-        printf("[%d] ID: %s | Flight: %s | Pos: %.4f, %.4f\n", i+1, icao, callsign, lat, lon);
-    }
+//         printf("[%d] ID: %s | Flight: %s | Pos: %.4f, %.4f\n", i+1, icao, callsign, lat, lon);
+//     }
 
-    cJSON_Delete(root);
-}
+//     cJSON_Delete(root);
+// }
 
 void airplane_fetcher_task(void *pvParameters) {
     while (1) {
@@ -84,7 +85,8 @@ void airplane_fetcher_task(void *pvParameters) {
 
         if (esp_http_client_perform(client) == ESP_OK) {
             if (response_buffer) {
-                parse_and_print_flights(response_buffer);
+                process_new_flights(response_buffer);
+                // parse_and_print_flights(response_buffer);
             }
         }
         esp_http_client_cleanup(client);
