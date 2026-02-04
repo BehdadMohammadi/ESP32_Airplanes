@@ -4,14 +4,15 @@
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
+#include "project_config.h"
 
 static const char *TAG = "FLIGHT_MGR";
 #define MAX_TRACKED_PLANES 20
 flight_data_t watchlist[MAX_TRACKED_PLANES];
 
 
-#define HOME_LAT 49.23622
-#define HOME_LON -122.84112
+#define HOME_LAT MY_HOME_LAT
+#define HOME_LON MY_HOME_LON
 
 #define EARTH_RADIUS_KM 6371.0
 #define DEG_TO_RAD(deg) (deg * M_PI / 180.0)

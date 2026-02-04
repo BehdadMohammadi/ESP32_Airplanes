@@ -7,10 +7,11 @@
 #include "esp_wifi.h"
 #include "esp_event.h"
 #include "esp_log.h"
+#include "project_config.h"
 
 // Hardcoded for now; in a pro project, these could come from Kconfig
-#define WIFI_SSID      "BEHDAD"
-#define WIFI_PASS      "behdad1234"
+#define WIFI_SSID      MY_SSID
+#define WIFI_PASS      MY_PASSWORD
 #define MAXIMUM_RETRY  5
 
 static EventGroupHandle_t s_wifi_event_group;
