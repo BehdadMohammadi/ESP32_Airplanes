@@ -12,6 +12,7 @@ typedef struct {
     float speed;
     double distance;
     bool is_active;
+    bool alert_sent;
 } flight_data_t;
 
 void flight_manager_init(void);

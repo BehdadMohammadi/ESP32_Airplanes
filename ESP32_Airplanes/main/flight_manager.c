@@ -4,7 +4,9 @@
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "project_config.h"
+#include "telegram_sender.h"
 
 static const char *TAG = "FLIGHT_MGR";
 #define MAX_TRACKED_PLANES 20
@@ -104,6 +106,17 @@ void process_new_flights(const char *json_str) {
                 watchlist[j].speed = vel;
                 watchlist[j].is_active = true;
                 watchlist[j].distance = dist;
+
+                if (watchlist[j].distance < 20.0 && !watchlist[j].alert_sent) {
+                    char alert_msg[128];
+                    snprintf(alert_msg, sizeof(alert_msg), 
+                    "*Near You!*\nFlight: %s\nDistance: %.2f km\nAlt: %.0f m", 
+                    watchlist[j].callsign, watchlist[j].distance, watchlist[j].altitude);
+            
+                    send_telegram_message(alert_msg);
+                    // watchlist[j].alert_sent = true;
+                }
+
                 found = true;
                 // ESP_LOGI(TAG, "INBOUND: %s | Alt: %.0fm | Spd: %.0f km/h", call, alt, vel);
                 break;
@@ -121,6 +134,16 @@ void process_new_flights(const char *json_str) {
                     watchlist[j].speed = vel;
                     watchlist[j].is_active = true;
                     watchlist[j].distance = dist;
+
+                    if (watchlist[j].distance < 20.0 && !watchlist[j].alert_sent) {
+                        char alert_msg[128];
+                        snprintf(alert_msg, sizeof(alert_msg), 
+                        "*Near You!*\nFlight: %s\nDistance: %.2f km\nAlt: %.0f m", 
+                        watchlist[j].callsign, watchlist[j].distance, watchlist[j].altitude);
+                
+                        send_telegram_message(alert_msg);
+                        // watchlist[j].alert_sent = true; 
+                    }
                     
                     // ESP_LOGI(TAG, "INBOUND: %s | Alt: %.0fm | Spd: %.0f km/h", call, alt, vel);
                     break;
@@ -128,6 +151,9 @@ void process_new_flights(const char *json_str) {
             }
         }
     }
+    char alert_msg[128];
+    snprintf(alert_msg, sizeof(alert_msg), "=========================\n");
+    send_telegram_message(alert_msg);
 
     // Remove planes that disappeared (out of range or landed)
     for (int i = 0; i < MAX_TRACKED_PLANES; i++) {
