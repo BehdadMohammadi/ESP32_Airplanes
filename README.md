@@ -13,27 +13,36 @@ This project transforms an ESP32 microcontroller into a portable aviation monito
 
 ## 🛠️ Hardware Requirements
 * **Microcontroller:** ESP32 Development Board.
-* **Display:** I2C OLED or SPI TFT screen.
 * **Connection:** 2.4GHz Wi-Fi.
 
 ## 💻 Installation & Setup
-1.  **Clone the Repository**
+**Clone the Repository**
     ```bash
     git clone [https://github.com/BehdadMohammadi/ESP32_Airplanes.git](https://github.com/BehdadMohammadi/ESP32_Airplanes.git)
     ```
 2.  **Configure Credentials**
-    Update the Wi-Fi credentials in your code:
-    ```cpp
-    const char* ssid = "YOUR_SSID";
-    const char* password = "YOUR_PASSWORD";
-    ```
-3.  **Upload**
-    Use the Arduino IDE or PlatformIO to flash the firmware to your ESP32.
+    You need to create a file named `project_config.h` in your project folder and define the following variables with your specific data:
 
-## 📦 Dependencies
-* [ArduinoJson](https://arduinojson.org/)
-* [Adafruit GFX Library](https://github.com/adafruit/Adafruit-GFX-Library)
-* [Adafruit SSD1306](https://github.com/adafruit/Adafruit_SSD1306)
+    ```cpp
+    #define MY_SSID       "Your_WiFi_Name"
+    #define MY_PASSWORD   "Your_WiFi_Password"
+
+    // Home Location
+    #define MY_HOME_LAT    00.0000 
+    #define MY_HOME_LON    00.0000 
+
+    // API Bounding Box (Roughly 50km around home)
+    #define LAT_MIN       "00.00"
+    #define LAT_MAX       "00.00"
+    #define LON_MIN       "00.00"
+    #define LON_MAX       "00.00"
+
+    #define TELEGRAM_TOKEN   "your_bot_token"
+    #define TELEGRAM_CHAT_ID "your_chat_id"
+    ```
+    
+    3.  **Upload**
+    Use the ESP-IDF to flash the firmware to your ESP32.
 
 ## 📄 License
 This project is open-source. Feel free to contribute or modify for your own tracking needs.
