@@ -9,7 +9,6 @@ This project transforms an ESP32 microcontroller into a portable aviation monito
 * **Live Data:** Real-time fetching of flight vectors via API (e.g., OpenSky Network).
 * **Efficient Parsing:** Optimized for embedded systems using `ArduinoJson`.
 * **Dual-Core Utilization:** Leverages ESP32 power for simultaneous data fetching and UI rendering.
-* **Compact Display:** Support for OLED (SSD1306) and TFT displays.
 
 ## 🛠️ Hardware Requirements
 * **Microcontroller:** ESP32 Development Board.
