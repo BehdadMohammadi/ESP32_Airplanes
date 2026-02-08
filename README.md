@@ -1,43 +1,39 @@
-ESP32 Airplanes ✈️
-A lightweight, ESP32-based flight tracking application. This project leverages the ESP32's Wi-Fi capabilities to fetch real-time aviation data, allowing users to monitor flights, altitudes, and headings directly from an embedded system.
+# ESP32 Airplanes ✈️
 
-🚀 Features
-Live Data Fetching: Connects to aviation APIs to retrieve real-time flight information.
+A real-time flight tracking system developed for the **ESP32** platform. This project connects to live aviation APIs to fetch, parse, and display flight data for aircraft in your vicinity.
 
-Embedded Processing: Efficiently parses JSON data using the ESP32's dual-core architecture.
+## 🌟 Overview
+This project transforms an ESP32 microcontroller into a portable aviation monitor. It leverages Wi-Fi to pull data from flight tracking services and presents real-time telemetry such as flight numbers, altitudes, and headings.
 
-Visual Output: Designed to interface with OLED or TFT displays for portable monitoring.
+## 🚀 Features
+* **Live Data:** Real-time fetching of flight vectors via API (e.g., OpenSky Network).
+* **Efficient Parsing:** Optimized for embedded systems using `ArduinoJson`.
+* **Dual-Core Utilization:** Leverages ESP32 power for simultaneous data fetching and UI rendering.
+* **Compact Display:** Support for OLED (SSD1306) and TFT displays.
 
-Low Power: Optimized for battery-operated or long-term stationary tracking.
+## 🛠️ Hardware Requirements
+* **Microcontroller:** ESP32 Development Board.
+* **Display:** I2C OLED or SPI TFT screen.
+* **Connection:** 2.4GHz Wi-Fi.
 
-🛠 Hardware Requirements
-Microcontroller: ESP32 (WROOM-32 or similar).
+## 💻 Installation & Setup
+1.  **Clone the Repository**
+    ```bash
+    git clone [https://github.com/BehdadMohammadi/ESP32_Airplanes.git](https://github.com/BehdadMohammadi/ESP32_Airplanes.git)
+    ```
+2.  **Configure Credentials**
+    Update the Wi-Fi credentials in your code:
+    ```cpp
+    const char* ssid = "YOUR_SSID";
+    const char* password = "YOUR_PASSWORD";
+    ```
+3.  **Upload**
+    Use the Arduino IDE or PlatformIO to flash the firmware to your ESP32.
 
-Display: SSD1306 OLED (I2C) or ST7789 TFT (SPI).
+## 📦 Dependencies
+* [ArduinoJson](https://arduinojson.org/)
+* [Adafruit GFX Library](https://github.com/adafruit/Adafruit-GFX-Library)
+* [Adafruit SSD1306](https://github.com/adafruit/Adafruit_SSD1306)
 
-Connection: Stable 2.4GHz Wi-Fi network.
-
-💻 Software Setup
-Clone the project:
-
-Bash
-git clone https://github.com/BehdadMohammadi/ESP32_Airplanes.git
-Install Libraries: Ensure you have the following libraries installed in your Arduino IDE or PlatformIO:
-
-WiFi.h & HTTPClient.h
-
-ArduinoJson
-
-Adafruit_GFX & Adafruit_SSD1306 (for OLED)
-
-Configure Wi-Fi: Update the SSID and Password in the main sketch to match your local network credentials.
-
-📂 Project Structure
-/src - Main source code and logic.
-
-/include - Header files and configuration.
-
-README.md - Project documentation.
-
-📝 License
-This project is open-source. Feel free to fork, modify, and share!
+## 📄 License
+This project is open-source. Feel free to contribute or modify for your own tracking needs.
