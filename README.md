@@ -1,47 +1,43 @@
-ESP32 Airplanes
-A real-time flight tracking system powered by the ESP32. This project fetches and processes live aviation data to monitor aircraft in your vicinity or globally, displaying key flight metrics on a compact interface.
+ESP32 Airplanes ✈️
+A lightweight, ESP32-based flight tracking application. This project leverages the ESP32's Wi-Fi capabilities to fetch real-time aviation data, allowing users to monitor flights, altitudes, and headings directly from an embedded system.
 
-Features
-Real-time Tracking: Connects to Wi-Fi to pull live flight data (via ADS-B or OpenSky API).
+🚀 Features
+Live Data Fetching: Connects to aviation APIs to retrieve real-time flight information.
 
-Detailed Metrics: Displays flight identifiers, altitude, ground speed, and heading.
+Embedded Processing: Efficiently parses JSON data using the ESP32's dual-core architecture.
 
-Hardware Optimized: Designed for the ESP32 architecture, utilizing its dual-core processing for seamless data fetching and display updates.
+Visual Output: Designed to interface with OLED or TFT displays for portable monitoring.
 
-Modular Display Support: Compatible with common SPI/I2C displays (e.g., SSD1306 OLED or ST7789 TFT).
+Low Power: Optimized for battery-operated or long-term stationary tracking.
 
-Hardware Requirements
-ESP32 Development Board (e.g., ESP32-WROOM-32)
+🛠 Hardware Requirements
+Microcontroller: ESP32 (WROOM-32 or similar).
 
-Display: 0.96" OLED or 1.8" TFT (optional but recommended)
+Display: SSD1306 OLED (I2C) or ST7789 TFT (SPI).
 
-Power Supply: Micro-USB or Li-Po battery
+Connection: Stable 2.4GHz Wi-Fi network.
 
-Software & Libraries
-To compile this project, ensure you have the following installed in your Arduino IDE or PlatformIO environment:
-
-Arduino-ESP32
-
-HTTPClient & WiFi: For data retrieval.
-
-ArduinoJson: For parsing flight data packets.
-
-Adafruit GFX & SSD1306/ST7735: For display rendering.
-
-Installation
-Clone the Repository:
+💻 Software Setup
+Clone the project:
 
 Bash
 git clone https://github.com/BehdadMohammadi/ESP32_Airplanes.git
-Configuration: Open the project in your IDE and update the credentials.h (or main sketch) with your Wi-Fi settings:
+Install Libraries: Ensure you have the following libraries installed in your Arduino IDE or PlatformIO:
 
-C++
-const char* ssid = "YOUR_WIFI_SSID";
-const char* password = "YOUR_WIFI_PASSWORD";
-Upload: Connect your ESP32 and hit Upload.
+WiFi.h & HTTPClient.h
 
-Usage
-Once powered on, the ESP32 will connect to the local network and begin polling for aircraft data. If a display is connected, you will see a scrolling list or a detailed view of the nearest flights.
+ArduinoJson
 
-Contributing
-Contributions are welcome! If you have ideas for new features or hardware support, feel free to fork the repo and submit a pull request.
+Adafruit_GFX & Adafruit_SSD1306 (for OLED)
+
+Configure Wi-Fi: Update the SSID and Password in the main sketch to match your local network credentials.
+
+📂 Project Structure
+/src - Main source code and logic.
+
+/include - Header files and configuration.
+
+README.md - Project documentation.
+
+📝 License
+This project is open-source. Feel free to fork, modify, and share!
